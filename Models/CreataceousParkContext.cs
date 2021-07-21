@@ -1,14 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace CretaceousPark.Models
+namespace CreataceousPark.Models
 {
-  public class CretaceousParkContext : DbContext
+  public class CreataceousParkContext : DbContext
   {
-    public CretaceousParkContext(DbContextOptions<CretaceousParkContext> options)
+    public CreataceousParkContext(DbContextOptions<CreataceousParkContext> options)
         : base(options)
     {
     }
 
     public DbSet<Animal> Animals { get; set; }
+
+    public DbSet<Headline> Headlines { get; set; }
   }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CreataceousPark.Solution.Migrations
 {
-    public partial class Initial : Migration
+    public partial class NYTHeadline : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,12 +22,29 @@ namespace CreataceousPark.Solution.Migrations
                 {
                     table.PrimaryKey("PK_Animals", x => x.AnimalId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Headlines",
+                columns: table => new
+                {
+                    HeadlineId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
+                    Abstract = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Headlines", x => x.HeadlineId);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Animals");
+
+            migrationBuilder.DropTable(
+                name: "Headlines");
         }
     }
 }

@@ -3,17 +3,17 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CretaceousPark.Models;
+using CreataceousPark.Models;
 
-namespace CretaceousPark.Controllers
+namespace CreataceousPark.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
   public class AnimalsController : ControllerBase
   {
-    private readonly CretaceousParkContext _db;
+    private readonly CreataceousParkContext _db;
 
-    public AnimalsController(CretaceousParkContext db)
+    public AnimalsController(CreataceousParkContext db)
     {
       _db = db;
     }
@@ -31,6 +31,9 @@ namespace CretaceousPark.Controllers
     {
       _db.Animals.Add(animal);
       await _db.SaveChangesAsync();
+
+      // make a call to the NYT top stories
+      // save that response to the database
 
       return CreatedAtAction(nameof(GetAnimal), new { id = animal.AnimalId }, animal);
     }

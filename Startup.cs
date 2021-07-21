@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using CretaceousPark.Models;
+using CreataceousPark.Models;
 
 namespace CreataceousPark.Solution
 {
@@ -22,7 +22,7 @@ namespace CreataceousPark.Solution
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<CretaceousParkContext>(opt =>
+            services.AddDbContext<CreataceousParkContext>(opt =>
                 opt.UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
 
             services.AddControllersWithViews();

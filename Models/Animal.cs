@@ -1,4 +1,4 @@
-namespace CretaceousPark.Models
+namespace CreataceousPark.Models
 {
   public class Animal
   {
