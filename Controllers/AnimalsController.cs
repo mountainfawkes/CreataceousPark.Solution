@@ -3,7 +3,10 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using CreataceousPark.Models;
+using CreataceousPark.Helpers;
 
 namespace CreataceousPark.Controllers
 {
@@ -30,9 +33,27 @@ namespace CreataceousPark.Controllers
     public async Task<ActionResult<Animal>> Post(Animal animal)
     {
       _db.Animals.Add(animal);
+      
       await _db.SaveChangesAsync();
 
       // make a call to the NYT top stories
+      var apiCallTask = ApiHelper.NytApiCall("a8N9RYvKvHtG8rQCQlv2jCJCqNvEbptD");
+      var result = apiCallTask.Result;
+      
+      // deserialize JSON result
+      JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
+      
+      // convert from a JObject to a list of headline objects
+      List<Headline> headlineList = JsonConvert.DeserializeObject<List<Headline>>(jsonResponse["results"].ToString());
+
+      foreach (Headline headline in headlineList)
+      {
+        Headline newHeadline = new Headline(headline.Title, headline.Summary);
+        _db.Headlines.Add(newHeadline);
+      }
+
+      await _db.SaveChangesAsync();
+
       // save that response to the database
 
       return CreatedAtAction(nameof(GetAnimal), new { id = animal.AnimalId }, animal);

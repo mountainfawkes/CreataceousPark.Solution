@@ -2,14 +2,16 @@
 using CreataceousPark.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CreataceousPark.Solution.Migrations
 {
     [DbContext(typeof(CreataceousParkContext))]
-    partial class CreataceousParkContextModelSnapshot : ModelSnapshot
+    [Migration("20210721221517_ChangeAbstractColumnName")]
+    partial class ChangeAbstractColumnName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
